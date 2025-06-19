@@ -1,100 +1,103 @@
-# 🧠 Tweet Sentiment Classification using Machine Learning
+# 🐦 Tweet Sentiment Analyzer (GUI + ML)
 
-This project aims to **analyze sentiment in tweets** by classifying them as either **Good** or **Bad** sentiment. It uses natural language processing (NLP) techniques, multiple machine learning models, and provides a **graphical user interface (GUI)** using `Tkinter` to test predictions interactively.
-
----
-
-## 📁 Project Structure
-
-### ✅ Part A: Data Loading and Preprocessing
-
-- Dataset: `twitter.csv`
-- Columns: `id`, `label`, `tweet`
-- Label Mapping:
-  - `0 → Good sentiment detected`
-  - `1 → Bad sentiment detected`
-  - `2 → null`
-- Special characters removed using regular expressions (`re.sub`).
+A machine learning-powered project that classifies the sentiment of tweets as **Good** or **Bad** — built with Python, scikit-learn, and an interactive Tkinter GUI.
 
 ---
 
-### ✅ Part B: Model Training and Evaluation
+## 📌 About the Project
 
-- **Text Vectorization**: `CountVectorizer` used to convert tweets to numeric format.
-- **Models Used**:
-  - `DecisionTreeClassifier`
-  - `RandomForestClassifier`
-  - `LogisticRegression`
+This project analyzes real tweets and predicts their sentiment using traditional ML models. It also includes a desktop-based GUI app where users can select tweets from a dropdown and view the prediction with dynamic UI feedback.
 
-- **Performance Comparison**:
-Decision Tree Accuracy: ~94.80%
-Random Forest Accuracy: ~95.79%
-Logistic Regression Accuracy: ~95.85%
-
-
-- Accuracy is computed using `accuracy_score` from `sklearn`.
+No deep learning — just clean preprocessing, classic models, and practical implementation.
 
 ---
 
-### ✅ Part C: GUI Application with Tkinter
+## 🗂 Dataset Overview
 
-- Developed a **Tkinter-based GUI** to:
-- Select a tweet from a dropdown (`Combobox`).
-- Predict its sentiment.
-- Display result dynamically with:
-  - Background color (Green = Good, Red = Bad, Gray = Unknown)
-  - Result label (`ANALYSIS RESULT`)
-- Clear the selection and reset UI.
-
-- GUI includes:
-- Combobox for tweet selection.
-- "ANALYSE" button to predict.
-- "Clear" button to reset.
-- Dynamic UI updates based on prediction.
+- File: `twitter.csv`
+- Structure:
+  - `id`: Tweet ID
+  - `label`: Numeric category — `0` (Good), `1` (Bad), `2` (Null)
+  - `tweet`: Text content of the tweet
+  - `category`: Human-readable label mapped from `label`
 
 ---
 
-## 🧪 Sample Output
+## 🧹 Preprocessing Steps
 
-**Example 1**  
-Input: `"factsguide society now motivation"`  
-Prediction: `Good sentiment detected`
-
-**Example 2**  
-Input: `"oops carl paladino didnt mean to publicly post racist comments..."`  
-Prediction: `Bad sentiment detected`
+- Removed special characters using `re` (regex)
+- Removed stopwords using NLTK (`stopwords.words("english")`)
+- Used `CountVectorizer` for feature extraction (BoW model)
+- Converted all tweets to lowercase text vector representation
 
 ---
 
-## ⚙️ Technologies Used
+## 🤖 Models Trained
 
-- Python 3.11
-- Libraries:
-- `pandas`
-- `numpy`
-- `nltk`
-- `scikit-learn`
-- `tkinter`
+Using scikit-learn:
+- ✅ Decision Tree
+- ✅ Random Forest
+- ✅ Logistic Regression
+
+### 🔍 Accuracy Results:
+
+| Model               | Accuracy   |
+|--------------------|------------|
+| Decision Tree       | 94.80%     |
+| Random Forest       | 95.79%     |
+| Logistic Regression | **95.85%** ✅ |
+
+> ⚠️ Logistic Regression performed best on this dataset.
 
 ---
 
-## ⚠️ Known Issues
+## 🧪 Test Example
 
-- If `nltk` throws SSL errors during stopword download, you may need to add:
 ```python
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
+test_data = "oops carl paladino didnt mean to publicly post racist comments..."
+prediction = clf.predict(cv.transform([test_data]))
+# Output: 'Bad sentiment detected'
+```
+🖥️ GUI Application (Tkinter)
+Simple and interactive GUI built using tkinter:
+Select tweet from dropdown
+Click ANALYSE to get result
+Background color changes:
+✅ Green: Good sentiment
+❌ Red: Bad sentiment
+⚪ Gray: Null or unclassified
+Click Clear to reset the UI
+
+
+🧰 Tech Stack
+Python 3.x
+Libraries:
+pandas
+numpy
+scikit-learn
+nltk
+tkinter
+
+🛠 Setup Instructions
+pip install pandas numpy scikit-learn nltk
+
+Then run:
+import nltk
 nltk.download('stopwords')
 
+📁 Project Structure
+tweet-sentiment-analyzer/
+├── twitter.csv
+├── tweet_classifier.ipynb     # Full analysis and training
+├── app_gui.py (optional)      # If GUI is in separate script
+└── README.md
 
-🚀 How to Run
-Ensure all dependencies are installed.
-Place twitter.csv in the same directory.
-Run the notebook or the GUI script.
-Use the GUI to test sentiment analysis on real tweets.
-📌 Author
-Subhash Kumar
-MCA Final Semester | Android & Machine Learning Enthusiast
+🎓 Author
+👤 Subhash Kumar
+🧑‍🎓 MCA Final Year | Passionate about Android, Python & ML
+📍 India
 
 
-Would you like me to also help generate this as a downloadable `README.md` file or upload-ready zip with script and assets?
+📌 Final Notes
+This project focuses on practical implementation of NLP + ML with a simple GUI — no over-engineered models, just results that work.
+
